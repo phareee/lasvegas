@@ -29,7 +29,6 @@ public class Game extends AnchorPane {
     private static final int BOT_WAIT_MILISECONDS = 1000;
     private static final double FOLD_OPACITY = 0.3;
     private static final boolean SHOW_BOT_CARDS = false;
-    private ReentrantLock lock = new ReentrantLock();
 
     private AnchorPane tableAnchorPane;
     private VBox buttonsPane;
@@ -233,7 +232,6 @@ public class Game extends AnchorPane {
     }
 
     private void giveCardsToPlayer(Player player, List<Card> cards) {
-        lock.lock();
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -243,7 +241,6 @@ public class Game extends AnchorPane {
                     playerToPane.get(player).cardsBox.setCards(cards);
             }
         });
-        lock.unlock();
     }
 
     private void setSliderTick() {
@@ -254,7 +251,7 @@ public class Game extends AnchorPane {
                 .addListener((obs, oldval, newVal) -> betSlider.setValue(Math.round(newVal.doubleValue())));
     }
     
-    private void setButtonImage(Button button,String url) {
+    /**/private void setButtonImage(Button button,String url) {
     	String image = ClassLoader.getSystemResource(url).toString();
 		ImageView img = new ImageView(image);
 		img.setFitWidth(120);
@@ -263,7 +260,6 @@ public class Game extends AnchorPane {
     }
 
     private void newTurn() {
-        lock.lock();
         try {
             Thread.sleep(300);
         } catch (InterruptedException e) {
@@ -278,11 +274,9 @@ public class Game extends AnchorPane {
                 }
             }
         });
-        lock.unlock();
     }
 
     private void endHand() {
-        lock.lock();
 
         try {
             Thread.sleep(500);
@@ -290,7 +284,6 @@ public class Game extends AnchorPane {
             e.printStackTrace();
         }
 
-        lock.unlock();
 
         try {
             Thread.sleep(2000);
@@ -298,7 +291,6 @@ public class Game extends AnchorPane {
             e.printStackTrace();
         }
 
-        lock.lock();
 
         Platform.runLater(new Runnable() {
             @Override
@@ -340,13 +332,11 @@ public class Game extends AnchorPane {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        lock.unlock();
 
         table.startNewHand();
     }
 
     private void addCardToTable(Card card) {
-        lock.lock();
         try {
             Thread.sleep(300);
         } catch (InterruptedException e) {
@@ -359,7 +349,6 @@ public class Game extends AnchorPane {
 
             }
         });
-        lock.unlock();
     }
 
     private void setSliderMinValue() {
@@ -415,7 +404,6 @@ public class Game extends AnchorPane {
     }
 
     public void yourTurn(Player player) {
-        lock.lock();
 
         Platform.runLater(new Runnable() {
 
@@ -448,7 +436,6 @@ public class Game extends AnchorPane {
                 }
             }
         });
-        lock.unlock();
 
     }
 
@@ -583,7 +570,6 @@ public class Game extends AnchorPane {
     }
 
     private void playerMadeMove(Player player, Actions action, int value) {
-        lock.lock();
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -601,7 +587,6 @@ public class Game extends AnchorPane {
                 potLabel.setText(Integer.toString(player.table.getNumberOfChipsOnTable()));
             }
         });
-        lock.unlock();
     }
 
     private void makeFoldButton() {

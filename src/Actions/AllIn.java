@@ -138,7 +138,7 @@ public class AllIn extends Action {
         player.isAllIn = true;
 
         player.lastAction = Actions.All_IN;
-
+        
         StringBuilder wyn = new StringBuilder();
         for (Pot p : player.table.allPots) {
             wyn.append("MAXBET: " + p.maxBet + "\n");
