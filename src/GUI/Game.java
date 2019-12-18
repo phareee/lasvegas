@@ -7,6 +7,8 @@ import javafx.scene.image.ImageView;
 import Casino.*;
 import javafx.beans.value.*;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -44,7 +46,7 @@ public class Game extends AnchorPane {
     private Pane player4Place;
     private Pane player5Place;
     private AnchorPane playersPane;
-    private TextField betTextField;
+    private Label betLabel;
     private Slider betSlider;
     private HBox tableCardsBox;
     private Label potLabel;
@@ -169,15 +171,9 @@ public class Game extends AnchorPane {
     	vbox.setSpacing(10);
     	vbox.setAlignment(Pos.CENTER);
     	
-    	betTextField = new TextField();
-    	betTextField.setOnKeyTyped(new EventHandler<KeyEvent>() {
-
-			@Override
-			public void handle(KeyEvent e) {
-				// TODO Auto-generated method stub
-				betTyped(e);
-			}
-		});
+    	betLabel = new Label();
+    	betLabel.setFont(new Font(20));
+    	betLabel.setStyle("-fx-text-fill: white;");
     	
     	betSlider = new Slider();
     	setSliderProporties();
@@ -191,7 +187,7 @@ public class Game extends AnchorPane {
     	foldButton.setStyle("-fx-background-color: transparent;");
     	callCheckButton.setStyle("-fx-background-color: transparent;");
     	
-    	buttonsPane.getChildren().addAll(betTextField,betSlider,betRaiseButton,callCheckButton,foldButton);
+    	buttonsPane.getChildren().addAll(betLabel,betSlider,betRaiseButton,callCheckButton,foldButton);
     	buttonsPane.setAlignment(Pos.CENTER);
     	buttonsPane.setSpacing(10);
     	
@@ -708,23 +704,13 @@ public class Game extends AnchorPane {
     private void onSliderDrag() {
         if ((int) betSlider.getValue() != currentBetValue) {
             String stringValue = Integer.toString((int) betSlider.getValue());
-            betTextField.setText(stringValue);
+            betLabel.setText(stringValue);
             currentBetValue = (int) betSlider.getValue();
         }
 
     }
 
-    private void betTyped(KeyEvent event) {
-        String text = betTextField.getText() + event.getCharacter();
-        int number = Integer.parseInt(text);
-        if (betSlider.getMax() < number)
-            currentBetValue = (int) betSlider.getMax();
-        else if (betSlider.getMin() > number)
-            currentBetValue = (int) betSlider.getMin();
-        else
-            currentBetValue = number;
-        betSlider.setValue(currentBetValue);
-    }
+
     
     private void setNewGameButton() {
     	setButtonImage(newgameButton, "newgame1.png");
