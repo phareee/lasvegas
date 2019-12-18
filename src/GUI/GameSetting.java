@@ -73,7 +73,7 @@ public class GameSetting extends AnchorPane{
     	startingchips.setStyle("-fx-font-size: 12pt; -fx-text-fill: white;");
     	smallBlindText = new TextField("10");
     	bigBlindText = new TextField("20");
-    	startingChipsText = new TextField("1500");
+    	startingChipsText = new TextField("500");
     	grid.add(smallblind, 0, 0);
     	grid.add(bigblind, 0, 1);
     	grid.add(startingchips, 0, 2);

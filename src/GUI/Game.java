@@ -225,10 +225,20 @@ public class Game extends AnchorPane {
     }
 
     private void setSliderProporties() {
-        setSliderTick();
-        setSliderMinValue();
-        setSliderMaxValue();
-        setSliderListener();
+    	betSlider.setCursor(Cursor.OPEN_HAND);
+    	betSlider.setShowTickLabels(true);
+    	betSlider.setShowTickMarks(true);
+        betSlider.setMajorTickUnit(100);
+        betSlider.setBlockIncrement(20);
+        betSlider.valueProperty()
+                .addListener((obs, oldval, newVal) -> betSlider.setValue(Math.round(newVal.doubleValue())));
+        betSlider.setMin(table.bigBlind);
+        betSlider.setMax(table.getCurrentPlayer().numberOfChips);
+        betSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
+                onSliderDrag();
+            }
+        });
     }
 
     private void giveCardsToPlayer(Player player, List<Card> cards) {
@@ -243,15 +253,7 @@ public class Game extends AnchorPane {
         });
     }
 
-    private void setSliderTick() {
-    	betSlider.setCursor(Cursor.OPEN_HAND);
-        betSlider.setMajorTickUnit(table.bigBlind);
-        betSlider.setMinorTickCount(table.bigBlind);
-        betSlider.valueProperty()
-                .addListener((obs, oldval, newVal) -> betSlider.setValue(Math.round(newVal.doubleValue())));
-    }
-    
-    /**/private void setButtonImage(Button button,String url) {
+    private void setButtonImage(Button button,String url) {
     	String image = ClassLoader.getSystemResource(url).toString();
 		ImageView img = new ImageView(image);
 		img.setFitWidth(120);
@@ -351,21 +353,6 @@ public class Game extends AnchorPane {
         });
     }
 
-    private void setSliderMinValue() {
-        betSlider.setMin(table.bigBlind);
-    }
-
-    private void setSliderMaxValue() {
-        betSlider.setMax(table.getCurrentPlayer().numberOfChips);
-    }
-
-    private void setSliderListener() {
-        betSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
-                onSliderDrag();
-            }
-        });
-    }
 
     private void addPlayersToView() {
         int index = 0;
