@@ -1,6 +1,8 @@
 # lasvegas
 LasVegas Casino
      Our LasVegas Casino Game is the Texas Hold'em Poker ,also called the "Cadillac of Poker," is the game you are going to play over and over again. So how do you play Texas hold'em? In Texas hold'em players are trying to make the best five-card poker hand according to traditional poker rankings. Each player is dealt two cards face down (the "hole cards"), then over the course of subsequent rounds five more cards are eventually dealt face up in the middle of the table. These face up cards are called the "community cards" because each player uses them to make a five-card poker hand.
+     
+![cards](https://user-images.githubusercontent.com/54446123/104495395-4f001800-560a-11eb-81be-8b3241f4a2fa.png)
  
 The five community cards are dealt in three stages:
 
